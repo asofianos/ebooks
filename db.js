@@ -9,6 +9,7 @@ var books = new Schema({
 	description	: String,
 	image 			: String,
 	price 			: Number,
+	currency    : String,
 	pages 			: Number
 });
 

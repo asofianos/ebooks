@@ -5,22 +5,12 @@ var Schema   = mongoose.Schema;
 var books = new Schema({
 	date_created 	: Date,
 	title 				: String,
-	authors 			: [{ type: Schema.Types.ObjectId, ref: 'authors' }],
+	authors 			: [String],
 	description		: String,
 	image 				: String,
 	price 				: Number,
 	currency    	: String,
 	pages 				: Number
-});
-
-var authors = new Schema({
-	date_created 	: Date,
-	lastname 			: String,
-	firstname 		: String,
-	fullname 			: String,
-	image 				: String,
-	description 	: String,
-	books					: [{ type: Schema.Types.ObjectId, ref: 'books' }]
 });
 
 var transactions = new Schema({
@@ -51,7 +41,6 @@ var users = new Schema({
 
 mongoose.model( 'users', users );
 mongoose.model( 'transactions', transactions );
-mongoose.model( 'authors', authors );
 mongoose.model( 'books', books );
 
 

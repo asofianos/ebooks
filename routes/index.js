@@ -96,11 +96,25 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/book', function(req, res){
-  return res.render('book');
+  if(req.book){
+		return res.redirect('/');
+	}
+  return res.render('sign_up');
 });
 
-router.get('/author', function(req, res){
-  return res.render('author');
+router.post('/book', function(req, res){
+	if(req.book){
+		return res.redirect('/');
+	}
+	var book = req.body;
+	//if no username
+	if(!book.title  || !book.title.trim()){
+		return res.json({status: "err", message: "empty title"});
+	}
+	//if no password 
+	if(!book.price || !book.price.trim()){
+		return res.json({status: "err", message: "empty price"});
+	}
 });
 
 

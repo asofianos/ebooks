@@ -45,7 +45,8 @@ var users = new Schema({
 	address   		: String,
 	email 				: String,
 	phone     		: String,
-	transactions  : [{ type: Schema.Types.ObjectId, ref: 'transactions' }]
+	transactions  : [{ type: Schema.Types.ObjectId, ref: 'transactions' }],
+	isAdmin				: {type: Boolean, default: false } 
 });
 
 mongoose.model( 'users', users );

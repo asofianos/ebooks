@@ -6,44 +6,43 @@
   </head>
   <body>
     <center>
-    <h1>If you dont have account then fill the form :P</h1>
-  	<form class="form-horizontal" role="form">
-  		<div class="form-group">
-  			<input class="form-control input-lg" for="inputUsername" type="text" placeholder="Username">
-  		</div>
-  		<div class="form-group">
-  			<input class="form-control input-lg" for="inputEmail" type="text" placeholder="Email">
-  		</div>
-  		<div class="form-group">
-  			<input class="form-control input-lg" for="inputPassword" type="text" placeholder="Password">
-  		</div>
+      <h1>If you dont have account then fill the form :P</h1>
+    	<form class="form-horizontal" method="post" action="/signup" role="form">
+    		<div class="form-group">
+    			<input class="form-control input-lg" name="username" type="text" placeholder="Username">
+    		</div>
+    		<div class="form-group">
+    			<input class="form-control input-lg" name="email" type="text" placeholder="Email">
+    		</div>
+    		<div class="form-group">
+    			<input class="form-control input-lg" name="password" type="password" placeholder="Password">
+    		</div>
 
-      <div class="form-group">
-        <input class="form-control input-lg" for="inputFirstname" type="text" placeholder="Firstname">
-      </div>
+        <div class="form-group">
+          <input class="form-control input-lg" name="firstname" type="text" placeholder="Firstname">
+        </div>
 
-      <div class="form-group">
-        <input class="form-control input-lg" for="inputLastname" type="text" placeholder="Lastname">
-      </div>
+        <div class="form-group">
+          <input class="form-control input-lg" name="lastname" type="text" placeholder="Lastname">
+        </div>
 
-      <div class="form-group">
-        <input class="form-control input-lg" for="inputaddress" type="text" placeholder="Address">
-      </div>
+        <div class="form-group">
+          <input class="form-control input-lg" name="address" type="text" placeholder="Address">
+        </div>
 
-      <div class="form-group">
-        <input class="form-control input-lg" for="inputphone" type="text" placeholder="Phone">
-      </div>
+        <div class="form-group">
+          <input class="form-control input-lg" name="phone" type="text" placeholder="Phone">
+        </div>
 
-      <p>Add an image.<br>
-        <input type="file" name="datafile" size="40">
-      </p>
-      
-			<div class="form-group">
-      	<input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN UP">
-    	</div>
-      <p>if you have an account then <a href="login">SIGN IN now!</a></p>
-		
-
+        <p>Add an image.<br>
+          <input type="file" name="image" size="40">
+        </p>
+        
+  			<div class="form-group">
+        	<input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN UP">
+      	</div>
+      </form>
+      <p>if you have an account then <a href="login">SIGN IN now!</a></p>	
     </center>
   </body>
 </html>

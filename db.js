@@ -4,23 +4,23 @@ var Schema   = mongoose.Schema;
 
 var books = new Schema({
 	date_created 	: Date,
-	title 			: String,
-	authors 		: [{ type: Schema.Types.ObjectId, ref: 'authors' }]
-	description	: String,
-	image 			: String,
-	price 			: Number,
-	currency    : String,
-	pages 			: Number
+	title 				: String,
+	authors 			: [{ type: Schema.Types.ObjectId, ref: 'authors' }],
+	description		: String,
+	image 				: String,
+	price 				: Number,
+	currency    	: String,
+	pages 				: Number
 });
 
 var authors = new Schema({
 	date_created 	: Date,
-	lastname 		: String,
-	firstname 	: String,
-	fullname 		: String,
-	image 			: String,
-	description : String,
-	books				: [{ type: Schema.Types.ObjectId, ref: 'books' }]
+	lastname 			: String,
+	firstname 		: String,
+	fullname 			: String,
+	image 				: String,
+	description 	: String,
+	books					: [{ type: Schema.Types.ObjectId, ref: 'books' }]
 });
 
 var transactions = new Schema({

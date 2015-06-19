@@ -1,29 +1,45 @@
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+//passport file
+require('../pass.js')(passport, LocalStrategy);
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function(req, res){
+  return res.render('index', { title: 'Express' });
 });
 
-router.get('/hello/:value', function(req, res, next) {
-  res.render('index', { title: req.params.value });
+router.get('/login', function(req, res){
+  return res.render('sign_in');
+});
+router.post(
+	'/login',
+  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
+  function(req, res){
+    res.redirect('/');
+  }
+);
+
+router.get('/signup', function(req, res){
+  return res.render('sign_up');
 });
 
-router.get('/sign_in', function(req, res, next) {
-  res.render('sign_in');
+router.post('/signup', function(req, res){
+
 });
 
-router.get('/sign_up', function(req, res, next) {
-  res.render('sign_up');
+router.get('/logout', function(req, res){
 });
 
-router.get('/book', function(req, res, next) {
-  res.render('book');
+router.get('/book', function(req, res){
+  return res.render('book');
 });
 
-router.get('/author', function(req, res, next) {
-  res.render('author');
+router.get('/author', function(req, res){
+  return res.render('author');
 });
 
 

@@ -14,6 +14,8 @@ var hash, hmac;
 //database models
 var mongoose = require( 'mongoose' );
 var users = mongoose.model( 'users', users );
+var books = mongoose.model( 'books', books );
+
 
 //passport file
 require('../pass.js')(passport, LocalStrategy);
@@ -95,26 +97,60 @@ router.get('/logout', function(req, res){
   return res.redirect('/login');
 });
 
-router.get('/book', function(req, res){
-  if(req.book){
-		return res.redirect('/');
+router.get('/books', function(req, res){
+  if(!req.user){//if he isnot loged in
+		return res.redirect('login');
 	}
-  return res.render('sign_up');
+	if(req.user.isAdmin) {
+		return res.render('books');
+	}
+ 	return res.redirect('/');
 });
 
-router.post('/book', function(req, res){
-	if(req.book){
-		return res.redirect('/');
+router.post('/books', function(req, res){
+	if(!req.user){
+		return res.redirect('login');
+	}
+	if (!req.user.isAdmin) {
+		return res.redirect('login');
 	}
 	var book = req.body;
-	//if no username
+	//console.log(book.title);
+
+	//if no title
 	if(!book.title  || !book.title.trim()){
 		return res.json({status: "err", message: "empty title"});
 	}
-	//if no password 
+	//if no price
 	if(!book.price || !book.price.trim()){
 		return res.json({status: "err", message: "empty price"});
 	}
+	var title = req.body.title.toLowerCase();
+  var book = new books({
+    title      : title
+    //password      : hash
+  });
+  books.findOne({title:title}).exec(function(err, book_exists){
+    if(err){
+    	return res.json({status:"error", message:"error occured"});
+    }
+    if(book_exists){
+      return res.json({status:"error", message:"the book already exists"});
+    }
+    if(!book_exists){
+      book.save( function(err, book){
+        if(err){
+        	return res.json({status:"error", message:"could not save new book"});
+        }
+        req.logIn(book, function(err){
+          if(err){ 
+          	return res.json({status:"error", message:"error occured"});
+          }
+      		return res.redirect('/');
+        });
+      });
+    }
+  });
 });
 
 

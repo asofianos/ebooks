@@ -98,7 +98,7 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/books', function(req, res){
-  if(!req.user){//if he isnot loged in
+  if(!req.user){//if he is not loged in
 		return res.redirect('login');
 	}
 	if(req.user.isAdmin) {
@@ -109,10 +109,10 @@ router.get('/books', function(req, res){
 
 router.post('/books', function(req, res){
 	if(!req.user){
-		return res.redirect('login');
+		return res.redirect('/login');
 	}
 	if (!req.user.isAdmin) {
-		return res.redirect('login');
+		return res.redirect('/');
 	}
 	var book = req.body;
 	//console.log(book.title);

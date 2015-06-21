@@ -9,21 +9,21 @@
     
     <center>
     	
-    	<h1>Create new book</h1>
+    	<h2>Create new book</h2>
     	<form id="bookform" method="post" action="/books" role="form">
     	
 	    	<div class="form-group">
 	  			<input class="form-control input-lg" name="title" type="text" placeholder="Title">
 	  		</div>
 
-	  		<textarea rows="4" cols="50" name="descrition" form="bookform" placeholder="Write here for the description"></textarea>
+	  		<textarea rows="4" cols="50" name="description" type="text" form="bookform" placeholder="Write here for the description"></textarea>
 
 	  		<p>Add an image.<br>
         	<input type="file" name="image" size="40">
       	</p>
 
 	      <div class="form-group">
-	        <input class="form-control input-lg" name="price" type="text" placeholder="Price">
+	        <input class="form-control input-lg" name="price" type="number" placeholder="Price">
 	      </div>
 
 	      <div class="form-group">

@@ -2,46 +2,77 @@
 <html>
   <head>
     <title>Sign up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/">WebSiteName</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <center>
-      <h1>If you dont have account then fill the form :P</h1>
-    	<form class="form-horizontal" method="post" action="/signup" role="form">
-    		<div class="form-group">
-    			<input class="form-control input-lg" name="username" type="text" placeholder="Username">
-    		</div>
-    		<div class="form-group">
-    			<input class="form-control input-lg" name="email" type="text" placeholder="Email">
-    		</div>
-    		<div class="form-group">
-    			<input class="form-control input-lg" name="password" type="password" placeholder="Password">
-    		</div>
+      <h2>If you dont have account then fill the form :P</h2>
+      <div class="container-fluid">
+        <div class="container">
+          <div class="row clearfix">
+            <div class="col-xs-10 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 column">
+            	<form class="form-horizontal" id="userform" method="post" action="/signup" role="form">
+            		<div class="form-group">
+            			<input class="form-control input-lg" name="username" type="text" placeholder="Username">
+            		</div>
+            		<div class="form-group">
+            			<input class="form-control input-lg" name="email" type="email" placeholder="Email">
+            		</div>
+            		<div class="form-group">
+            			<input class="form-control input-lg" name="password" type="password" placeholder="Password">
+            		</div>
 
-        <div class="form-group">
-          <input class="form-control input-lg" name="firstname" type="text" placeholder="Firstname">
+                <div class="form-group">
+                  <input class="form-control input-lg" name="firstname" type="text" placeholder="Firstname">
+                </div>
+
+                <div class="form-group">
+                  <input class="form-control input-lg" name="lastname" type="text" placeholder="Lastname">
+                </div>
+
+                <div class="form-group">
+                  <input class="form-control input-lg" name="address" type="text" placeholder="Address">
+                </div>
+
+                <div class="form-group">
+                  <input class="form-control input-lg" name="phone" type="text" placeholder="Phone">
+                </div>
+
+                <p>Add an image.<br>
+                  <input type="file" name="image" size="40">
+                </p>
+                
+          			<div class="form-group">
+                	<input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN UP">
+              	</div>
+              </form>
+            </div>
+          </div>
         </div>
-
-        <div class="form-group">
-          <input class="form-control input-lg" name="lastname" type="text" placeholder="Lastname">
-        </div>
-
-        <div class="form-group">
-          <input class="form-control input-lg" name="address" type="text" placeholder="Address">
-        </div>
-
-        <div class="form-group">
-          <input class="form-control input-lg" name="phone" type="text" placeholder="Phone">
-        </div>
-
-        <p>Add an image.<br>
-          <input type="file" name="image" size="40">
-        </p>
-        
-  			<div class="form-group">
-        	<input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN UP">
-      	</div>
-      </form>
+      </div>
       <p>if you have an account then <a href="login">SIGN IN now!</a></p>	
     </center>
   </body>

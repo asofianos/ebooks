@@ -14,7 +14,7 @@ var hash, hmac;
 //database models
 var mongoose = require( 'mongoose' );
 var users = mongoose.model( 'users', users );
-var books = mongoose.model( 'books', books );
+//var books = mongoose.model( 'books', books );
 
 
 //passport file
@@ -96,7 +96,7 @@ router.get('/logout', function(req, res){
   }
   return res.redirect('/login');
 });
-
+/*
 router.get('/books', function(req, res){
   if(!req.user){//if he is not loged in
 		return res.redirect('login');
@@ -115,8 +115,8 @@ router.post('/books', function(req, res){
 		return res.redirect('/');
 	}
 	var book = req.body;
-	//console.log(book.title);
-
+	console.log(book);
+	
 	//if no title
 	if(!book.title  || !book.title.trim()){
 		return res.json({status: "err", message: "empty title"});
@@ -126,9 +126,14 @@ router.post('/books', function(req, res){
 		return res.json({status: "err", message: "empty price"});
 	}
 	var title = req.body.title.toLowerCase();
+	var description = req.body.description.toLowerCase();
+	var price = req.body.price;
+	var pages = req.body.pages;
   var book = new books({
-    title      : title
-    //password      : hash
+    title       : title,
+    description : description,
+    price			  : price,
+    pages			  : pages
   });
   books.findOne({title:title}).exec(function(err, book_exists){
     if(err){
@@ -142,18 +147,14 @@ router.post('/books', function(req, res){
         if(err){
         	return res.json({status:"error", message:"could not save new book"});
         }
-        req.logIn(book, function(err){
-          if(err){ 
-          	return res.json({status:"error", message:"error occured"});
-          }
-      		return res.redirect('/');
-        });
+        console.log("you create new book");
+        return res.redirect('/');
       });
     }
   });
 });
 
-
+*/
 function generateHash(text){
   hmac = crypto.createHmac(algorithm, key);
   // change to 'binary' if you want a binary digest

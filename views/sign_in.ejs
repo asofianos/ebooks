@@ -2,25 +2,55 @@
 <html>
   <head>
     <title>Sign in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/">WebSiteName</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   	<center>
-    	<h1>WELCOME !!</h1>
+    	<h2>WELCOME !!</h2>
     	<div class="container-fluid">
-  	    <form class="form-horizontal" method="post" action="/login" role="form">
-    	    <div class="form-group">
-    			<input class="form-control input-lg" type="text" name="username" placeholder="Username">
-      		</div>
-        	<div class="form-group">
-            	<input class="form-control input-lg" type="password" name="password" placeholder="Password">
-        	</div>
-          <div class="form-group">
-              <input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN IN">
-          </div>
-  	    </form>
+	    	<div class="container">
+	        <div class="row clearfix">
+	          <div class="col-xs-10 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 column">
+
+			  	    <form class="form-horizontal" method="post" action="/login" role="form">
+			    	    <div class="form-group">
+			    				<input class="form-control input-lg" type="text" name="username" placeholder="Username">
+			      		</div>
+			        	<div class="form-group">
+			            <input class="form-control input-lg" type="password" name="password" placeholder="Password">
+			        	</div>
+			          <div class="form-group">
+			             <input type="submit" class="col-xs-12 btn btn-submit btn-primary btn-lg" value="SIGN IN">
+			          </div>
+			  	    </form>
+    				</div>
+    			</div>
+    		</div>
     	</div>
+
 
     	<p>Don’t have an account?  <a href="signup">SIGN UP now!</a></p>
     </center>

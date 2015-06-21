@@ -1,25 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-//authendication 
-/*var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var crypto    = require('crypto');
-var key       = 'secret';
-var algorithm = 'sha1';
-var hash, hmac;*/
-
 //database models
 var mongoose = require( 'mongoose' );
-var users = mongoose.model( 'users', users );
+//var users = mongoose.model( 'users', users );
 var books = mongoose.model( 'books', books );
 
-
-//passport file
-//require('../pass.js')(passport, LocalStrategy);
-
-
-router.get('/books', function(req, res){
+//path=/books
+router.get('/', function(req, res){
   if(!req.user){//if he is not loged in
 		return res.redirect('login');
 	}
@@ -29,7 +17,7 @@ router.get('/books', function(req, res){
  	return res.redirect('/');
 });
 
-router.post('/books', function(req, res){
+router.post('/', function(req, res){
 	if(!req.user){
 		return res.redirect('/login');
 	}

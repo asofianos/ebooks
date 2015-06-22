@@ -13,14 +13,23 @@ var hash, hmac;
 //database models
 var mongoose = require( 'mongoose' );
 var users = mongoose.model( 'users', users );
+var books = mongoose.model( 'books', books );
 
 //passport file
 require('../pass.js')(passport, LocalStrategy);
 
-
+/*
 router.get('/', function(req, res){
   return res.render('index', { title: 'Express' });
 });
+*/
+
+router.get('/', function(req , res){
+	books.find({}, function(err,docs){
+  	console.log("find");
+    return res.render('index',{data:docs,title: 'Express'});     
+  });
+}); 
 
 router.get('/login', function(req, res){
 	if(req.user){

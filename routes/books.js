@@ -37,11 +37,14 @@ router.post('/', function(req, res){
 	}
 	var title = req.body.title.toLowerCase();
 	var description = req.body.description.toLowerCase();
+	var image = req.body.image;
 	var price = req.body.price;
 	var pages = req.body.pages;
+
   var book = new books({
     title       : title,
     description : description,
+    image				: image,
     price			  : price,
     pages			  : pages
   });

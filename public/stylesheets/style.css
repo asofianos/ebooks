@@ -14,3 +14,27 @@ a:hover {
 	text-decoration: none;
 	color: white;
 }
+
+div.relative {
+  position: relative;
+  width: 150px;
+  height: 200px;
+} 
+
+div.bookImage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+  height: 200px;
+  border: 1px solid gray;
+}
+div.bookSummary {
+  position: absolute;
+  top: 0px;
+  left: 150px;
+  width: 500px;
+  height: 200px;
+  background-color: #FCF4C7;
+  border: 1px solid gray;
+}

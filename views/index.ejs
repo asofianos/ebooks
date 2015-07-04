@@ -47,19 +47,23 @@
     <p>Welcome to <%= title %></p>
     <ul>
     	<% data.forEach(function(dbData){ %>
-    		<div  style="" >
-    			<img src="../public/images/<%= dbData.image %>" alt="<%= dbData.image %>" width="150" height="200">
+    	<div class="relative">
+    		<div  class="bookImage" >
+    			<img src="/images/<%= dbData.image %>" alt="<%= dbData.image %>" width="150" height="200">
     		</div>
-    		<div style="background-color: #FCF4C7">
+    		<div class="bookSummary">
     			<p><b>Title : </b><%= dbData.title %> </p>
     			<p><b>Description : </b><%= dbData.description %></p>
+    			<p><b>Authors : </b><%= dbData.authors %></p>
     			<p><b>Price : </b><%= dbData.price %></p>
     			<p><b>Pages : </b><%= dbData.pages %></p>
     		</div>
-    		
+    	</div>
     		
       <% }); %>
     </ul>
     
+    
+
   </body>
 </html>

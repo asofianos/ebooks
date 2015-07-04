@@ -12,6 +12,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -40,6 +41,20 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//uploading files
+app.use(multer({
+  dest: './public/images/',
+  rename: function (fieldname, filename) {
+    return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+  },
+  onFileUploadStart: function (file, req, res) {
+  	if(file.extension != 'jpg' && file.extension != 'png' ){
+  		return false;
+  	} 
+  }
+}))
+
 
 app.use('/', routes);
 app.use('/users', users);

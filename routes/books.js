@@ -13,10 +13,12 @@ router.get('/', function(req, res){
 	}
 	if(req.user.isAdmin) {
 		books.find({}, function(err,docs){
-  		console.log(docs);   
+  		console.log(docs);
+  		console.log("fernw vivlio");   
 			return res.render('books',{data:docs});
 		});
-	}return res.render('books');
+		return res.render('books');
+	}
 
  	return res.redirect('/');
 });

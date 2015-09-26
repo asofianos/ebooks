@@ -25,6 +25,7 @@ router.post('/', function(req, res){
 		return res.redirect('/');
 	}
 	console.log(req.files);
+	console.log("diavazw gia upload");
 	if (!req.files || !req.files.image) {
 		return res.redirect('/createbook');
 	}

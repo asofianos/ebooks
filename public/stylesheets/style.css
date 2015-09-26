@@ -38,3 +38,8 @@ div.bookSummary {
   background-color: #FCF4C7;
   border: 1px solid gray;
 }
+div.bookEdit {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}

@@ -26,7 +26,6 @@ router.get('/', function(req, res){
 
 router.get('/', function(req , res){
 	books.find({}, function(err,docs){
-  	console.log("find");
     return res.render('index',{data:docs,title: 'Express'});     
   });
 }); 

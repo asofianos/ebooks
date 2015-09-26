@@ -17,6 +17,8 @@ var multer = require('multer');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var books = require('./routes/books');
+var createbook = require('./routes/createbook');
+var editbook = require('./routes/editbook');
 
 var app = express();
 
@@ -46,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({
   dest: './public/images/',
   rename: function (fieldname, filename) {
-    return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+    return filename.replace(/\W+/g, '-').toLowerCase()
   },
   onFileUploadStart: function (file, req, res) {
   	if(file.extension != 'jpg' && file.extension != 'png' ){
@@ -59,7 +61,8 @@ app.use(multer({
 app.use('/', routes);
 app.use('/users', users);
 app.use('/books', books);
-
+app.use('/createbook', createbook);
+app.use('/editbook', editbook);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

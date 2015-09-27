@@ -40,33 +40,36 @@
 
     <center>
       <a href="/books">Go back to Books</a>
+      <br>
+      <a href="/createbook">Create new Book</a>
     	
     	<h2>Edit the book</h2>
       <div class="container-fluid">
         <div class="container">
           <div class="row clearfix">
             <div class="col-xs-10 col-sm-6 col-md-6 col-lg-6 col-xs-offset-1 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 column">
-            	<form id="bookform" method="post" action="/editbook" role="form" enctype="multipart/form-data">
+            	<form id="bookform" method="post" action="/editbook/<%= data._id %>" role="form" enctype="multipart/form-data">
             	
         	    	<div class="form-group">
-        	  			<input class="form-control input-lg" name="title" type="text" placeholder="Title">
+        	  			<input class="form-control input-lg" name="title" type="text" value="<%= data.title%>">
         	  		</div>
 
-        	  		<textarea class="form-control input-lg" rows="4" cols="50" name="description" type="text" form="bookform" placeholder="Write here for the description"></textarea>
+        	  		<textarea class="form-control input-lg" rows="4" cols="50" name="description" type="text" form="bookform"><%= data.description%></textarea>
 
-                <textarea class="form-control input-lg" rows="4" cols="50" name="authors" type="text" form="bookform" placeholder="Write here authors"></textarea>
+                <textarea class="form-control input-lg" rows="4" cols="50" name="authors" type="text" form="bookform"><%= data.authors%></textarea>
 
                 <div class="form-group">
-                  <p>Select image.
+                  <p>Book's image:
+                    <img src="/images/<%= data.image %>" alt="<%= data.image %>" width="150" height="200">
                     <input class="form-control input-lg" type="file" name="image" size="40">
                 	</p>
                 </div>
         	      <div class="form-group">
-        	        <input class="form-control input-lg" name="price" type="number" placeholder="Price">
+        	        <input class="form-control input-lg" name="price" type="number" value="<%= data.price%>">
         	      </div>
 
         	      <div class="form-group">
-        	        <input class="form-control input-lg" name="pages" type="text" placeholder="Pages">
+        	        <input class="form-control input-lg" name="pages" type="text" value="<%= data.pages%>">
         	      </div>
 
         	      <div class="form-group">

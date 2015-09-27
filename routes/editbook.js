@@ -6,33 +6,40 @@ var mongoose = require( 'mongoose' );
 //var users = mongoose.model( 'users', users );
 var books = mongoose.model( 'books', books );
 
-//path=/editbook
-router.get('/', function(req, res){
+//path=/editbook/id
+router.get('/:id', function(req, res){
   if(!req.user){//if he is not loged in
 		return res.redirect('login');
 	}
 	if(req.user.isAdmin) {
-		var id = req.body;
-		books.findOne({ _id:id}, function(err,docs){
-  		console.log("find the book");
-    	return res.render('editbook',{data:docs});     
+		var id = req.params.id;
+		books.findOne({ _id:id}, function(err,bookData){ 
+			return res.render('editbook',{data:bookData});   
   	});
-	}	 
-	
- 	return res.redirect('/books');
+  	
+	}else{
+		return res.redirect('/books');
+	}
 });
 
-router.post('/', function(req, res){
+router.post('/:id', function(req, res){
 	if(!req.user){
 		return res.redirect('/login');
 	}
 	if (!req.user.isAdmin) {
 		return res.redirect('/');
 	}
+	console.log(req.body);
 	console.log(req.files);
+	var id = req.params.id;
+	console.log(id);
+   
+	
 	if (!req.files || !req.files.image) {
+		console.log("no files");
 		return res.redirect('/createbook');
 	}
+
 	//if no title
 	if(!req.body.title  || !req.body.title.trim()){
 		return res.json({status: "err", message: "empty title"});
@@ -41,9 +48,12 @@ router.post('/', function(req, res){
 	if(!req.body.price || !req.body.price.trim()){
 		return res.json({status: "err", message: "empty price"});
 	}
+	
+	//asyncronous rename of image
+  var imgName = req.file.filename + '.jpg';
+  fs.rename('./public/images/'+req.file.filename, './public/images/'+ imgName, function(err){});
 	var title = req.body.title;
 	var description = req.body.description;
-	var image = req.files.image.name;
 	var price = req.body.price;
 	var pages = req.body.pages;
 	var allAuthors = req.body.authors;
@@ -52,16 +62,19 @@ router.post('/', function(req, res){
   var book = new books({
     title       : title,
     description : description,
-    image				: image,
+    image				: imgName,
     price			  : price,
     pages			  : pages,
-    authors           : arrayOfAuthors
+    authors     : arrayOfAuthors
   });
   books.findOne({title:title}).exec(function(err, book_exists){
     if(err){
     	return res.json({status:"error", message:"error occured"});
     }
     if(book_exists){
+      //remove the uploaded image
+      fs.unlink('./public/images/' + req.file.filename, function(err){});
+      fs.unlink('./public/images/' + imgName, function(err){});
       return res.json({status:"error", message:"the book already exists"});
     }
     if(!book_exists){
@@ -69,12 +82,14 @@ router.post('/', function(req, res){
         if(err){
         	return res.json({status:"error", message:"could not save new book"});
         }
-        console.log("book updated");
-        return res.redirect('/');
+        return res.redirect('/books');
       });
     }
   });
 });
+
+
+
 
 
 module.exports = router;

@@ -12,15 +12,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var multer = require('multer');
-var upload = multer({ dest: 'public/images/',
-  rename: function (fieldname, filename) {
-    return filename.replace(/\W+/g, '-').toLowerCase()
-  },onFileUploadStart: function (file, req, res) {
-    if(file.extension != 'jpg' && file.extension != 'png' ){
-      return false;
-    } 
-  } })
 
 
 var routes = require('./routes/index');
@@ -53,15 +44,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//uploading files
-
-
-app.post('/createbook', upload.single('image'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  console.log(req.file);
-  console.log("kanw upload apo to app");
-})
 
 app.use('/', routes);
 app.use('/users', users);

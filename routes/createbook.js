@@ -1,6 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
+var fs = require('fs');
+
+var multer = require('multer');
+var upload = multer({ dest: 'public/images/',
+  onFileUploadStart: function (file, req, res) {
+    if(file.mimetype != 'image/jpg' && file.mimetype != 'image/png' ){
+      return false;
+    } 
+  }
+});
+
+
+
 //database models
 var mongoose = require( 'mongoose' );
 //var users = mongoose.model( 'users', users );
@@ -17,16 +30,16 @@ router.get('/', function(req, res){
  	return res.redirect('/');
 });
 
-router.post('/', function(req, res){
+router.post('/', upload.single('image'), function(req, res){
 	if(!req.user){
 		return res.redirect('/login');
 	}
 	if (!req.user.isAdmin) {
 		return res.redirect('/');
 	}
-	console.log(req.files);
-	console.log("diavazw gia upload");
-	if (!req.files || !req.files.image) {
+
+  //if no image inserted
+	if (!req.file) {
 		return res.redirect('/createbook');
 	}
 	//if no title
@@ -37,9 +50,12 @@ router.post('/', function(req, res){
 	if(!req.body.price || !req.body.price.trim()){
 		return res.json({status: "err", message: "empty price"});
 	}
+
+  //asyncronous rename of image
+  var imgName = req.file.filename + '.jpg';
+  fs.rename('./public/images/'+req.file.filename, './public/images/'+ imgName, function(err){});
 	var title = req.body.title;
 	var description = req.body.description;
-	var image = req.files.image.name;
 	var price = req.body.price;
 	var pages = req.body.pages;
 	var allAuthors = req.body.authors;
@@ -48,16 +64,19 @@ router.post('/', function(req, res){
   var book = new books({
     title       : title,
     description : description,
-    image				: image,
+    image				: imgName,
     price			  : price,
     pages			  : pages,
-    authors           : arrayOfAuthors
+    authors     : arrayOfAuthors
   });
   books.findOne({title:title}).exec(function(err, book_exists){
     if(err){
     	return res.json({status:"error", message:"error occured"});
     }
     if(book_exists){
+      //remove the uploaded image
+      fs.unlink('./public/images/' + req.file.filename, function(err){});
+      fs.unlink('./public/images/' + imgName, function(err){});
       return res.json({status:"error", message:"the book already exists"});
     }
     if(!book_exists){
@@ -65,7 +84,6 @@ router.post('/', function(req, res){
         if(err){
         	return res.json({status:"error", message:"could not save new book"});
         }
-        console.log("you create new book");
         return res.redirect('/books');
       });
     }
